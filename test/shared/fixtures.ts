@@ -15,6 +15,7 @@ interface FactoryFixture {
 
 async function factoryFixture(): Promise<FactoryFixture> {
   const factoryFactory = await ethers.getContractFactory('UniswapV3Factory')
+  // @ts-ignore
   const factory = (await factoryFactory.deploy()) as UniswapV3Factory
   return { factory }
 }
@@ -27,8 +28,11 @@ interface TokensFixture {
 
 async function tokensFixture(): Promise<TokensFixture> {
   const tokenFactory = await ethers.getContractFactory('TestERC20')
+  // @ts-ignore
   const tokenA = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as TestERC20
+  // @ts-ignore
   const tokenB = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as TestERC20
+  // @ts-ignore
   const tokenC = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as TestERC20
 
   const [token0, token1, token2] = [tokenA, tokenB, tokenC].sort((tokenA, tokenB) =>
@@ -64,7 +68,9 @@ export const poolFixture: Fixture<PoolFixture> = async function (): Promise<Pool
   const calleeContractFactory = await ethers.getContractFactory('TestUniswapV3Callee')
   const routerContractFactory = await ethers.getContractFactory('TestUniswapV3Router')
 
+  // @ts-ignore
   const swapTargetCallee = (await calleeContractFactory.deploy()) as TestUniswapV3Callee
+  // @ts-ignore
   const swapTargetRouter = (await routerContractFactory.deploy()) as TestUniswapV3Router
 
   return {
@@ -75,6 +81,7 @@ export const poolFixture: Fixture<PoolFixture> = async function (): Promise<Pool
     swapTargetCallee,
     swapTargetRouter,
     createPool: async (fee, tickSpacing, firstToken = token0, secondToken = token1) => {
+      // @ts-ignore
       const mockTimePoolDeployer = (await MockTimeUniswapV3PoolDeployerFactory.deploy()) as MockTimeUniswapV3PoolDeployer
       const tx = await mockTimePoolDeployer.deploy(
         factory.address,
@@ -86,6 +93,7 @@ export const poolFixture: Fixture<PoolFixture> = async function (): Promise<Pool
 
       const receipt = await tx.wait()
       const poolAddress = receipt.events?.[0].args?.pool as string
+      // @ts-ignore
       return MockTimeUniswapV3PoolFactory.attach(poolAddress) as MockTimeUniswapV3Pool
     },
   }

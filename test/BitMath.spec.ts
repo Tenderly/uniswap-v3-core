@@ -9,6 +9,7 @@ describe('BitMath', () => {
   let bitMath: BitMathTest
   const fixture = async () => {
     const factory = await ethers.getContractFactory('BitMathTest')
+    // @ts-ignore
     return (await factory.deploy()) as BitMathTest
   }
   beforeEach('deploy BitMathTest', async () => {

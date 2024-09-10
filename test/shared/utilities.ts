@@ -120,12 +120,14 @@ export function createPoolFunctions({
     targetPrice: BigNumberish,
     to: Wallet | string
   ): Promise<ContractTransaction> {
+    // @ts-ignore
     const method = inputToken === token0 ? swapTarget.swapToLowerSqrtPrice : swapTarget.swapToHigherSqrtPrice
 
     await inputToken.approve(swapTarget.address, constants.MaxUint256)
 
     const toAddress = typeof to === 'string' ? to : to.address
 
+    // @ts-ignore
     return method(pool.address, targetPrice, toAddress)
   }
 
@@ -138,6 +140,7 @@ export function createPoolFunctions({
     const exactInput = amountOut === 0
 
     const method =
+      // @ts-ignore
       inputToken === token0
         ? exactInput
           ? swapTarget.swapExact0For1
@@ -147,6 +150,7 @@ export function createPoolFunctions({
         : swapTarget.swap1ForExact0
 
     if (typeof sqrtPriceLimitX96 === 'undefined') {
+      // @ts-ignore
       if (inputToken === token0) {
         sqrtPriceLimitX96 = MIN_SQRT_RATIO.add(1)
       } else {
@@ -157,39 +161,48 @@ export function createPoolFunctions({
 
     const toAddress = typeof to === 'string' ? to : to.address
 
+    // @ts-ignore
     return method(pool.address, exactInput ? amountIn : amountOut, toAddress, sqrtPriceLimitX96)
   }
 
   const swapToLowerPrice: SwapToPriceFunction = (sqrtPriceX96, to) => {
+    // @ts-ignore
     return swapToSqrtPrice(token0, sqrtPriceX96, to)
   }
 
   const swapToHigherPrice: SwapToPriceFunction = (sqrtPriceX96, to) => {
+    // @ts-ignore
     return swapToSqrtPrice(token1, sqrtPriceX96, to)
   }
 
   const swapExact0For1: SwapFunction = (amount, to, sqrtPriceLimitX96) => {
+    // @ts-ignore
     return swap(token0, [amount, 0], to, sqrtPriceLimitX96)
   }
 
   const swap0ForExact1: SwapFunction = (amount, to, sqrtPriceLimitX96) => {
+    // @ts-ignore
     return swap(token0, [0, amount], to, sqrtPriceLimitX96)
   }
 
   const swapExact1For0: SwapFunction = (amount, to, sqrtPriceLimitX96) => {
+    // @ts-ignore
     return swap(token1, [amount, 0], to, sqrtPriceLimitX96)
   }
 
   const swap1ForExact0: SwapFunction = (amount, to, sqrtPriceLimitX96) => {
+    // @ts-ignore
     return swap(token1, [0, amount], to, sqrtPriceLimitX96)
   }
 
+  // @ts-ignore
   const mint: MintFunction = async (recipient, tickLower, tickUpper, liquidity) => {
     await token0.approve(swapTarget.address, constants.MaxUint256)
     await token1.approve(swapTarget.address, constants.MaxUint256)
     return swapTarget.mint(pool.address, recipient, tickLower, tickUpper, liquidity)
   }
 
+  // @ts-ignore
   const flash: FlashFunction = async (amount0, amount1, to, pay0?: BigNumberish, pay1?: BigNumberish) => {
     const fee = await pool.fee()
     if (typeof pay0 === 'undefined') {
@@ -241,6 +254,7 @@ export function createMultiPoolFunctions({
     const method = swapTarget.swapForExact0Multi
     await inputToken.approve(swapTarget.address, constants.MaxUint256)
     const toAddress = typeof to === 'string' ? to : to.address
+    // @ts-ignore
     return method(toAddress, poolInput.address, poolOutput.address, amountOut)
   }
 
@@ -248,6 +262,7 @@ export function createMultiPoolFunctions({
     const method = swapTarget.swapForExact1Multi
     await inputToken.approve(swapTarget.address, constants.MaxUint256)
     const toAddress = typeof to === 'string' ? to : to.address
+    // @ts-ignore
     return method(toAddress, poolInput.address, poolOutput.address, amountOut)
   }
 

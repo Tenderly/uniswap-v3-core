@@ -9,6 +9,7 @@ describe('LiquidityMath', () => {
   let liquidityMath: LiquidityMathTest
   const fixture = async () => {
     const factory = await ethers.getContractFactory('LiquidityMathTest')
+    // @ts-ignore
     return (await factory.deploy()) as LiquidityMathTest
   }
   beforeEach('deploy LiquidityMathTest', async () => {

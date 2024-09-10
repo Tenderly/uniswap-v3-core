@@ -76,14 +76,18 @@ function swapCaseToDescription(testCase: SwapTestCase): string {
   if ('exactOut' in testCase) {
     if (testCase.exactOut) {
       if (testCase.zeroForOne) {
+        // @ts-ignore
         return `swap token0 for exactly ${formatTokenAmount(testCase.amount1)} token1${priceClause}`
       } else {
+        // @ts-ignore
         return `swap token1 for exactly ${formatTokenAmount(testCase.amount0)} token0${priceClause}`
       }
     } else {
       if (testCase.zeroForOne) {
+        // @ts-ignore
         return `swap exactly ${formatTokenAmount(testCase.amount0)} token0 for token1${priceClause}`
       } else {
+        // @ts-ignore
         return `swap exactly ${formatTokenAmount(testCase.amount1)} token1 for token0${priceClause}`
       }
     }
@@ -113,12 +117,15 @@ async function executeSwap(
       if (testCase.zeroForOne) {
         swap = await poolFunctions.swap0ForExact1(testCase.amount1, SWAP_RECIPIENT_ADDRESS, testCase.sqrtPriceLimit)
       } else {
+        // @ts-ignore
         swap = await poolFunctions.swap1ForExact0(testCase.amount0, SWAP_RECIPIENT_ADDRESS, testCase.sqrtPriceLimit)
       }
     } else {
       if (testCase.zeroForOne) {
+        // @ts-ignore
         swap = await poolFunctions.swapExact0For1(testCase.amount0, SWAP_RECIPIENT_ADDRESS, testCase.sqrtPriceLimit)
       } else {
+        // @ts-ignore
         swap = await poolFunctions.swapExact1For0(testCase.amount1, SWAP_RECIPIENT_ADDRESS, testCase.sqrtPriceLimit)
       }
     }

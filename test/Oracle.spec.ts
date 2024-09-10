@@ -18,6 +18,7 @@ describe('Oracle', () => {
 
   const oracleFixture = async () => {
     const oracleTestFactory = await ethers.getContractFactory('OracleTest')
+    // @ts-ignore
     return (await oracleTestFactory.deploy()) as OracleTest
   }
 
@@ -58,6 +59,7 @@ describe('Oracle', () => {
       })
     })
     it('gas', async () => {
+      // @ts-ignore
       await snapshotGasCost(oracle.initialize({ liquidity: 1, tick: 1, time: 1 }))
     })
   })
@@ -117,20 +119,24 @@ describe('Oracle', () => {
     })
 
     it('gas for growing by 1 slot when index == cardinality - 1', async () => {
+      // @ts-ignore
       await snapshotGasCost(oracle.grow(2))
     })
 
     it('gas for growing by 10 slots when index == cardinality - 1', async () => {
+      // @ts-ignore
       await snapshotGasCost(oracle.grow(11))
     })
 
     it('gas for growing by 1 slot when index != cardinality - 1', async () => {
       await oracle.grow(2)
+      // @ts-ignore
       await snapshotGasCost(oracle.grow(3))
     })
 
     it('gas for growing by 10 slots when index != cardinality - 1', async () => {
       await oracle.grow(2)
+      // @ts-ignore
       await snapshotGasCost(oracle.grow(12))
     })
   })

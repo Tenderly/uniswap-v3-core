@@ -22,6 +22,7 @@ describe('UniswapV3Factory', () => {
   let poolBytecode: string
   const fixture = async () => {
     const factoryFactory = await ethers.getContractFactory('UniswapV3Factory')
+    // @ts-ignore
     return (await factoryFactory.deploy()) as UniswapV3Factory
   }
 
@@ -119,6 +120,7 @@ describe('UniswapV3Factory', () => {
     })
 
     it('gas', async () => {
+      // @ts-ignore
       await snapshotGasCost(factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.MEDIUM))
     })
   })

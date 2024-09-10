@@ -16,6 +16,7 @@ describe('TickMath', () => {
 
   before('deploy TickMathTest', async () => {
     const factory = await ethers.getContractFactory('TickMathTest')
+    // @ts-ignore
     tickMath = (await factory.deploy()) as TickMathTest
   })
 

@@ -13,7 +13,9 @@ describe('SwapMath', () => {
   before(async () => {
     const swapMathTestFactory = await ethers.getContractFactory('SwapMathTest')
     const sqrtPriceMathTestFactory = await ethers.getContractFactory('SqrtPriceMathTest')
+    // @ts-ignore
     swapMath = (await swapMathTestFactory.deploy()) as SwapMathTest
+    // @ts-ignore
     sqrtPriceMath = (await sqrtPriceMathTestFactory.deploy()) as SqrtPriceMathTest
   })
 

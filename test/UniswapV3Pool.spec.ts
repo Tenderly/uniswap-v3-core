@@ -1349,7 +1349,9 @@ describe('UniswapV3Pool', () => {
   // https://github.com/Uniswap/uniswap-v3-core/issues/214
   it('tick transition cannot run twice if zero for one swap ends at fractional price just below tick', async () => {
     pool = await createPool(FeeAmount.MEDIUM, 1)
+    // @ts-ignore
     const sqrtTickMath = (await (await ethers.getContractFactory('TickMathTest')).deploy()) as TickMathTest
+    // @ts-ignore
     const swapMath = (await (await ethers.getContractFactory('SwapMathTest')).deploy()) as SwapMathTest
     const p0 = (await sqrtTickMath.getSqrtRatioAtTick(-24081)).add(1)
     // initialize at a price of ~0.3 token1/token0
@@ -1684,6 +1686,7 @@ describe('UniswapV3Pool', () => {
     })
 
     it('cannot reenter from swap callback', async () => {
+      // @ts-ignore
       const reentrant = (await (
         await ethers.getContractFactory('TestUniswapV3ReentrantCallee')
       ).deploy()) as TestUniswapV3ReentrantCallee
@@ -1972,6 +1975,7 @@ describe('UniswapV3Pool', () => {
     let underpay: TestUniswapV3SwapPay
     beforeEach('deploy swap test', async () => {
       const underpayFactory = await ethers.getContractFactory('TestUniswapV3SwapPay')
+      // @ts-ignore
       underpay = (await underpayFactory.deploy()) as TestUniswapV3SwapPay
       await token0.approve(underpay.address, constants.MaxUint256)
       await token1.approve(underpay.address, constants.MaxUint256)

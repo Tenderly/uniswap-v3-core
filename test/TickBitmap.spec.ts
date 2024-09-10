@@ -8,6 +8,7 @@ describe('TickBitmap', () => {
 
   beforeEach('deploy TickBitmapTest', async () => {
     const tickBitmapTestFactory = await ethers.getContractFactory('TickBitmapTest')
+    // @ts-ignore
     tickBitmap = (await tickBitmapTestFactory.deploy()) as TickBitmapTest
   })
 
@@ -71,14 +72,17 @@ describe('TickBitmap', () => {
     })
 
     it('gas cost of flipping first tick in word to initialized', async () => {
+      // @ts-ignore
       await snapshotGasCost(await tickBitmap.getGasCostOfFlipTick(1))
     })
     it('gas cost of flipping second tick in word to initialized', async () => {
       await tickBitmap.flipTick(0)
+      // @ts-ignore
       await snapshotGasCost(await tickBitmap.getGasCostOfFlipTick(1))
     })
     it('gas cost of flipping a tick that results in deleting a word', async () => {
       await tickBitmap.flipTick(0)
+      // @ts-ignore
       await snapshotGasCost(await tickBitmap.getGasCostOfFlipTick(0))
     })
   })

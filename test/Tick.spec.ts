@@ -13,6 +13,7 @@ describe('Tick', () => {
 
   beforeEach('deploy TickTest', async () => {
     const tickTestFactory = await ethers.getContractFactory('TickTest')
+    // @ts-ignore
     tickTest = (await tickTestFactory.deploy()) as TickTest
   })
 

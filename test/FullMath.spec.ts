@@ -15,6 +15,7 @@ describe('FullMath', () => {
   let fullMath: FullMathTest
   before('deploy FullMathTest', async () => {
     const factory = await ethers.getContractFactory('FullMathTest')
+    // @ts-ignore
     fullMath = (await factory.deploy()) as FullMathTest
   })
 
