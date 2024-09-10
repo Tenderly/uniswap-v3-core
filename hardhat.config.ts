@@ -2,6 +2,9 @@ import 'hardhat-typechain'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-etherscan'
+import * as tdly from '@tenderly/hardhat-tenderly';
+
+tdly.setup({automaticVerifications: true});
 
 export default {
   networks: {
@@ -52,6 +55,10 @@ export default {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
     apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  tenderly: {
+    username: "dule-tenderly",
+    project: "project"
   },
   solidity: {
     version: '0.7.6',
