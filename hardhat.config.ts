@@ -44,6 +44,9 @@ export default {
     bnb: {
       url: `https://bsc-dataseed.binance.org/`,
     },
+    tenderly: {
+      url: `https://virtual.mainnet.rpc.tenderly.co/9e4a1806-2817-4632-8644-358cb3ffec39`,
+    }
   },
   etherscan: {
     // Your API key for Etherscan
