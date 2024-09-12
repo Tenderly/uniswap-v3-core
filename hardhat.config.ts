@@ -51,6 +51,9 @@ export default {
       url: `https://virtual.mainnet.rpc.tenderly.co/9e4a1806-2817-4632-8644-358cb3ffec39`,
     }
   },
+  mocha: {
+    timeout: 0,
+  },
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
